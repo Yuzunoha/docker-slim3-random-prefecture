@@ -16,20 +16,8 @@ function pdo()
 
 $app = new \Slim\App;
 
-$app->get('/prefectural-capital', function (Request $request, Response $response) {
-  $sql = 'select * from kvs1';
-  $sth = pdo()->prepare($sql);
-  $sth->execute();
-  $data = $sth->fetchAll(PDO::FETCH_ASSOC);
-  return $response->withJson($data, 200, JSON_UNESCAPED_UNICODE);
-});
-
-$app->get('/prefectural-capital/{prefecture}', function (Request $request, Response $response) {
-  $sql = 'select * from kvs1 where _key = :_key';
-  $param = [':_key' => $request->getAttribute('prefecture')];
-  $sth = pdo()->prepare($sql);
-  $sth->execute($param);
-  $data = $sth->fetchAll(PDO::FETCH_ASSOC);
+$app->get('/random-prefecture', function (Request $request, Response $response) {
+  $data = ['data' => 'ランダムな都道府県の漢字'];
   return $response->withJson($data, 200, JSON_UNESCAPED_UNICODE);
 });
 
