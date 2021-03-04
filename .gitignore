@@ -1,0 +1,8 @@
+.env
+.vscode
+
+server_prefectural_capital/docker/mysql/data
+server_prefectural_capital/docker/phpmyadmin
+
+server_random_prefecture/docker/mysql/data
+server_random_prefecture/docker/phpmyadmin
