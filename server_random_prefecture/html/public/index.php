@@ -20,7 +20,18 @@ $app->get('/random-prefecture', function (Request $request, Response $response) 
   $sql = 'select * from kvs1';
   $sth = pdo()->prepare($sql);
   $sth->execute();
-  $data = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+  // [{"_key":"三重県","_value":"津市"},{"_key":"京都府","_value":"京都市"},...]
+  $beans = $sth->fetchAll(PDO::FETCH_ASSOC);
+
+  $prefectures = [];
+  foreach ($beans as $bean) {
+    $prefectures[] = $bean["_key"];
+  }
+  shuffle($prefectures);
+
+  $randomPrefecture = $prefectures[0];
+  $data = ['prefecture' => $randomPrefecture];
   return $response->withJson($data, 200, JSON_UNESCAPED_UNICODE);
 });
 
