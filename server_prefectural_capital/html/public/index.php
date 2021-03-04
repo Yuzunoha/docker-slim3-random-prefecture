@@ -16,6 +16,14 @@ function pdo()
 
 $app = new \Slim\App;
 
+$app->add(function ($req, $res, $next) {
+  $response = $next($req, $res);
+  return $response
+    ->withHeader('Access-Control-Allow-Origin', '*')
+    ->withHeader('Access-Control-Allow-Headers', '*')
+    ->withHeader('Access-Control-Allow-Methods', '*');
+});
+
 $app->get('/prefectural-capital', function (Request $request, Response $response) {
   $sql = 'select * from kvs1';
   $sth = pdo()->prepare($sql);

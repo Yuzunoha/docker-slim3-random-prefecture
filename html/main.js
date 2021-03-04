@@ -3,10 +3,17 @@
 const p = console.log;
 
 const urlRandomPrefecture = 'http://localhost:20180/random-prefecture';
-const url = 'http://localhost:20080/prefectural-capital/' + encodeURI('東京都');
+const urlPrefecturalCapital = 'http://localhost:20080/prefectural-capital/';
 
-p(url);
-
-fetch(url)
+fetch(urlRandomPrefecture)
   .then((res) => res.json())
-  .then(p);
+  .then((jsonRP) => {
+    const prefecture = jsonRP.prefecture;
+    fetch(urlPrefecturalCapital + encodeURI(prefecture))
+      .then((res) => res.json())
+      .then((jsonPC) => {
+        const capital = jsonPC[0]._value;
+        const msg = `${prefecture}の首都は${capital}です。`;
+        p(msg);
+      });
+  });
