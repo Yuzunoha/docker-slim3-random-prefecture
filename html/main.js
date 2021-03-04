@@ -1,9 +1,9 @@
 'use strict';
 
-const urlRandomPrefecture = 'http://localhost:20180/random-prefecture';
-
 const p = console.log;
 
-fetch(urlRandomPrefecture)
-  .then((res) => res.json())
-  .then(p);
+const urlRandomPrefecture = 'http://localhost:20180/random-prefecture';
+const url = 'http://localhost:20080/prefectural-capital/' + encodeURI('東京都');
+
+p(unescape(encodeURI('東京都')));
+p(encodeURI('東京都'));
