@@ -6,7 +6,7 @@
    make up
    ```
 
-1. ブラウザで `html/index.html` を開く
+1. ブラウザで `index.html` を開く
 
 1. docker コンテナを終了する
    ```
