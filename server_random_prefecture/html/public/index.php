@@ -17,7 +17,10 @@ function pdo()
 $app = new \Slim\App;
 
 $app->get('/random-prefecture', function (Request $request, Response $response) {
-  $data = ['data' => 'ランダムな都道府県の漢字'];
+  $sql = 'select * from kvs1';
+  $sth = pdo()->prepare($sql);
+  $sth->execute();
+  $data = $sth->fetchAll(PDO::FETCH_ASSOC);
   return $response->withJson($data, 200, JSON_UNESCAPED_UNICODE);
 });
 
