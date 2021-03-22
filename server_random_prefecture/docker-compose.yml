@@ -2,8 +2,8 @@ version: '3'
 services:
   nginx:
     image: nginx
-    ports:
-      - 20180:80
+    environment:
+      - VIRTUAL_HOST=prefecture.yuzunoha.net    
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./html:/var/www/html
@@ -32,7 +32,10 @@ services:
       - PMA_HOST=mysql
       - PMA_USER=root
       - PMA_PASSWORD=root
-    ports:
-      - 20181:80
     volumes:
       - ./docker/phpmyadmin/sessions:/sessions
+networks:
+  default:
+    external:
+      name: nginx-proxy
+
